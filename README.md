@@ -6,5 +6,6 @@ Dodatkowo, użytkownik może kliknąć na tytuł aby przejść do strony interne
 
 Zbiór danych: https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2019/2019-04-23/tidy_anime.csv
 
-Aby uruchomić program należy zainstalować biblioteki z pliku requirements.txt - <code>pip install -r requirements.txt</code> i w terminalu wywołać komendę <code>streamlit run app.py</code>
-
+Aby uruchomić program, należy najpierw zainstalować wymagane biblioteki z pliku requirements.txt. 
+Należy to zrobić za pomocą polecenia <code>pip install -r requirements.txt</code> w terminalu. 
+Następnie, w terminalu należy wywołać komendę <code>streamlit run app.py</code>, aby uruchomić aplikację.
