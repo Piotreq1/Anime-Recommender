@@ -11,12 +11,12 @@ cosine_sim = np.load('cosine_sim.npy')
 
 
 def recommend_movies(title):
-    index = anime_df[anime_df['name'] == title].index[0]
+    index = anime_df[anime_df['title'] == title].index[0]
     dist = list(enumerate(cosine_sim[index]))
     dist.sort(reverse=True, key=lambda x: x[1])
     anime_list = []
     for i in dist[1:6]:
-        anime_list.append((anime_df.iloc[i[0]]['name'], anime_df.iloc[i[0]]['animeID']))
+        anime_list.append((anime_df.iloc[i[0]]['title'], anime_df.iloc[i[0]]['uid']))
     return anime_list
 
 
@@ -26,15 +26,17 @@ def get_poster(anime, column):
     response = requests.get(url)
     soup = BeautifulSoup(response.content, 'html.parser')
     img_tag = soup.find('img', {'alt': anime[0]})
-    img_url = img_tag['data-src']
-    img_response = requests.get(img_url)
-    img = Image.open(io.BytesIO(img_response.content))
-    column.image(img)
-    return url
+    if img_tag:
+        img_url = img_tag['data-src']
+        img_response = requests.get(img_url)
+        img = Image.open(io.BytesIO(img_response.content))
+        column.image(img)
+        return url
+
 
 
 st.title('Anime Recommender')
-movies = anime_df['name'].tolist()
+movies = anime_df['title'].tolist()
 movie_title = st.selectbox('Select a anime title', movies)
 
 if st.button('Recommend'):
